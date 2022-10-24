@@ -3,6 +3,10 @@ import { middyfy } from '@libs/lambda';
 
 export const getProductById = async (event) => {
   const { productId } = event.pathParameters;
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+  }
 
   try{
       const products = await getProducts();
@@ -17,10 +21,7 @@ export const getProductById = async (event) => {
       return {
         statusCode: 200,
         body: JSON.stringify(result),
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-        }
+        headers: headers
       }
     } catch(e) {
       return {
@@ -28,10 +29,7 @@ export const getProductById = async (event) => {
         body: JSON.stringify({
           error: `Failed to load product with ID ${productId}`
         }),
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-        }
+        headers: headers
       }
     }
   }
