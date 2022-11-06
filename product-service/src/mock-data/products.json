@@ -1,0 +1,92 @@
+{
+  "products": [
+    {
+      "PutRequest": {
+        "Item": {
+          "description": { "S": "Honor SL" },
+          "id": { "S": "7567ec4b-b10c-48c5-9345-fc73c48a80aa" },
+          "price": { "N": "2.4" },
+          "title": { "S": "Zuiho Opt.Co." },
+          "image": { "S": "https://cdn.shopify.com/s/files/1/0420/2774/5443/products/zuiho-optco-honor-sl-520333_1100x.jpg?v=1640014494" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "description": { "S": "SL 706 + Color-Ultron" },
+          "id": { "S": "7567ec4b-b10c-48c5-9345-fc73c48a80a0" },
+          "price": { "N": "100" },
+          "title": { "S": "Zeiss Ikon" },
+          "image": { "S": "https://cdn.shopify.com/s/files/1/0420/2774/5443/products/zeiss-ikon-sl-706-color-ultron-312736_1600x.jpg?v=1640014302" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "description": { "S": "Vitessa (125) with Ultron" },
+          "id": { "S": "7567ec4b-b10c-48c5-9345-fc73c48a80a2" },
+          "price": { "N": "230" },
+          "title": { "S": "Vouigtländer" },
+          "image": { "S": "https://cdn.shopify.com/s/files/1/0420/2774/5443/products/vouigtlander-vitessa-125-with-ultron-109056_480x.jpg?v=1648045450" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "description": { "S": "F Black KS 80A" },
+          "id": { "S": "7567ec4b-b10c-48c5-9345-fc73c48a80a1" },
+          "price": { "N": "120" },
+          "title": { "S": "Nikon" },
+          "image": { "S": "https://cdn.shopify.com/s/files/1/0420/2774/5443/products/nikon-f-black-ks-80a-666197_480x.jpg?v=1640014726" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "description": { "S": "Periflex Gold Star" },
+          "id": { "S": "7567ec4b-b10c-48c5-9345-fc73c48a80a3" },
+          "price": { "N": "145" },
+          "title": { "S": "Corfield" },
+          "image": { "S": "https://cdn.shopify.com/s/files/1/0420/2774/5443/products/corfield-periflex-gold-star-519812_960x.jpg" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "description": { "S": "Paxette automatic + Ennalyt 1.9/90mm" },
+          "id": { "S": "7567ec4b-b10c-48c5-9345-fc73348a80a1" },
+          "price": { "N": "150" },
+          "title": { "S": "Braun, Nürnberg" },
+          "image": { "S": "https://cdn.shopify.com/s/files/1/0420/2774/5443/products/braun-nurnberg-paxette-automatic-ennalyt-1990mm-188760_960x.jpg" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "description": { "S": "Robot Luftwaffen Model" },
+          "id": { "S": "7567ec4b-b10c-48c5-9445-fc73c48a80a2" },
+          "price": { "N": "780" },
+          "title": { "S": "Berning" },
+          "image": { "S": "https://cdn.shopify.com/s/files/1/0420/2774/5443/products/berning-robot-luftwaffen-model-194298_960x.jpg" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "description": { "S": "TSVVS 1950" },
+          "id": { "S": "7567ec4b-b10c-45c5-9345-fc73c48a80a1" },
+          "price": { "N": "600" },
+          "title": { "S": "ALMAZ, Moscow" },
+          "image": { "S": "https://cdn.shopify.com/s/files/1/0420/2774/5443/products/almaz-moscow-tsvvs-1950-957155_960x.jpg" }
+        }
+      }
+    }
+  ]
+}
