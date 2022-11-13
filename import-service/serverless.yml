@@ -1,0 +1,50 @@
+service: import-service
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: dev
+  region: eu-west-1
+
+  # you can add statements to the Lambda function's IAM Role here
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action: "s3:ListBucket"
+      Resource:
+        - "arn:aws:s3:::task-5-uploaded-y-hurynovich"
+    - Effect: "Allow"
+      Action:
+        - "s3:*"
+      Resource:
+        - "arn:aws:s3:::task-5-uploaded-y-hurynovich/*"
+
+  # you can define service wide environment variables here
+  # environment:
+  #   UPLOADED_BUCKET: "task-5-uploaded"
+
+# you can add packaging information here
+#package:
+#  patterns:
+#    - '!exclude-me.js'
+#    - '!exclude-me-dir/**'
+#    - include-me.js
+#    - include-me-dir/**
+
+functions:
+  importProductsFile:
+    handler: importProductsFile.importProductsFile
+    events:
+      - httpApi:
+          path: /import
+          method: get
+
+  importFileParser:
+    handler: importFileParser.importFileParser
+    events:
+      - s3:
+          bucket: task-5-uploaded-y-hurynovich
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploaded/
+          existing: true
