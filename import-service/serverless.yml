@@ -1,5 +1,9 @@
 service: import-service
 frameworkVersion: "3"
+useDotenv: true
+
+plugins:
+  - serverless-dotenv-plugin
 
 provider:
   name: aws
@@ -11,36 +15,41 @@ provider:
   iamRoleStatements:
     - Effect: "Allow"
       Action: "s3:ListBucket"
-      Resource:
-        - "arn:aws:s3:::task-5-uploaded-y-hurynovich"
+      Resource: ${env:S3BUCKET_ARN}
     - Effect: "Allow"
       Action:
         - "s3:*"
+      Resource: ${env:S3BUCKET_ARN}/*
+    - Effect: "Allow"
+      Action: "sqs:*"
+      Resource: ${env:SQS_ARN}
+    - Effect: "Allow"
+      Action: "sns:*"
       Resource:
-        - "arn:aws:s3:::task-5-uploaded-y-hurynovich/*"
+        Ref: createProductTopicSnS
+    - Effect: Allow
+      Action: "dynamodb:*"
+      Resource: ${env:DYNAMODB_PRODUCTS_ARN}
+    - Effect: Allow
+      Action: "dynamodb:*"
+      Resource: ${env:DYNAMODB_STOCKS_ARN}
 
   # you can define service wide environment variables here
-  # environment:
-  #   UPLOADED_BUCKET: "task-5-uploaded"
-
-# you can add packaging information here
-#package:
-#  patterns:
-#    - '!exclude-me.js'
-#    - '!exclude-me-dir/**'
-#    - include-me.js
-#    - include-me-dir/**
+  environment:
+    UPLOADED_BUCKET: "task-5-uploaded"
+    SQS_URL: ${env:SQS_URL}
+    SNS_ARN: ${env:SNS_ARN}
 
 functions:
   importProductsFile:
-    handler: importProductsFile.importProductsFile
+    handler: handlers/importProductsFile.importProductsFile
     events:
-      - httpApi:
+      - http:
           path: /import
           method: get
 
   importFileParser:
-    handler: importFileParser.importFileParser
+    handler: handlers/importFileParser.importFileParser
     events:
       - s3:
           bucket: task-5-uploaded-y-hurynovich
@@ -48,3 +57,31 @@ functions:
           rules:
             - prefix: uploaded/
           existing: true
+
+  catalogBatchProcess:
+    handler: handlers/catalogBatchProcess.catalogBatchProcess
+    events:
+      - sqs:
+          batchSize: 5
+          arn:
+            Fn::GetAtt:
+              - catalogItemsQueue
+              - Arn
+
+resources:
+  Resources:
+    catalogItemsQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: catalogItemsQueue
+    createProductTopicSnS:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: createProductTopicSnS
+    snsSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: ${env:EMAIL}
+        Protocol: email
+        TopicArn:
+          Ref: createProductTopicSnS

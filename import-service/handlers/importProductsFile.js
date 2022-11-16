@@ -3,14 +3,9 @@
 const AWS = require('aws-sdk');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
+const { headers } = require('../utils/headers');
 const BUCKET = 'task-5-uploaded-y-hurynovich';
 const s3 = new S3Client({ region: 'eu-west-1' });
-
-const headers = {
-    "Access-Control-Allow-Headers" : "Content-Type",
-    'Access-Control-Allow-Origin': '*',
-    "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT"
-};
 
 module.exports.importProductsFile = async (event) => {
     console.log('event', event);
@@ -32,7 +27,7 @@ module.exports.importProductsFile = async (event) => {
 
         return {
             statusCode: 200,
-            headers: headers,
+            headers,
             body: signedUrl,
         }
 
@@ -41,7 +36,7 @@ module.exports.importProductsFile = async (event) => {
 
         return {
             statusCode: 500,
-            headers: headers,
+            headers,
             body: JSON.stringify({
                 error: `Failed with: ${error}`
             }),

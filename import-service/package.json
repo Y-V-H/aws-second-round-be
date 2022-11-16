@@ -12,6 +12,10 @@
     "@aws-sdk/client-s3": "^3.204.0",
     "@aws-sdk/s3-request-presigner": "^3.204.0",
     "aws-sdk": "^2.1248.0",
-    "csv-parser": "^3.0.0"
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "serverless-dotenv-plugin": "^4.0.2"
   }
 }
