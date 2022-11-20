@@ -1,4 +1,5 @@
 import { middyfy } from '@libs/lambda';
+import { headers } from '../../utils/headers';
 const AWS = require("aws-sdk");
 const dynamo = new AWS.DynamoDB.DocumentClient();
 
@@ -8,8 +9,7 @@ const getItem = async (tableName, id) => {
         Key: {
             id
         }
-    })
-        .promise();
+    }).promise();
 
     return result.Item;
 }
@@ -17,11 +17,6 @@ const getItem = async (tableName, id) => {
 export const getProductByIdDynamoDB = async (event) => {
     const { productId } = event.pathParameters;
     console.log('get product by ID with argument', productId);
-
-    const headers = {
-        'Access-Control-Allow-Origin': '*',
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-    }
 
     try {
         const productItem = await getItem('products', productId);

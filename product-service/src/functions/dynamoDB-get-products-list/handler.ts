@@ -1,11 +1,7 @@
 import { middyfy } from "@libs/lambda";
+import { headers } from '../../utils/headers';
 const AWS = require("aws-sdk");
 const dynamo = new AWS.DynamoDB.DocumentClient();
-
-const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-};
 
 const scanDynamoDBTable = (tableName: string): any => {
     return dynamo

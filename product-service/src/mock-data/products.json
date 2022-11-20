@@ -5,7 +5,7 @@
         "Item": {
           "description": { "S": "Honor SL" },
           "id": { "S": "7567ec4b-b10c-48c5-9345-fc73c48a80aa" },
-          "price": { "N": "2.4" },
+          "price": { "N": "24" },
           "title": { "S": "Zuiho Opt.Co." },
           "image": { "S": "https://cdn.shopify.com/s/files/1/0420/2774/5443/products/zuiho-optco-honor-sl-520333_1100x.jpg?v=1640014494" }
         }
