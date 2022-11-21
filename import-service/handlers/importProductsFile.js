@@ -22,7 +22,7 @@ module.exports.importProductsFile = async (event) => {
 
         const command = new PutObjectCommand(params);
         const signedUrl = await getSignedUrl(s3, command, {
-            expiresIn: 60,
+            expiresIn: 100,
         });
 
         return {
