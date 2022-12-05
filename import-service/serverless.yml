@@ -10,6 +10,12 @@ provider:
   runtime: nodejs16.x
   stage: dev
   region: eu-west-1
+  httpApi:
+    cors: true
+    authorizers:
+      customAuthorizer:
+        type: request
+        functionArn: arn:aws:lambda:eu-west-1:827936631780:function:authorization-service-dev-basicAuthorizer
 
   # you can add statements to the Lambda function's IAM Role here
   iamRoleStatements:
@@ -44,9 +50,12 @@ functions:
   importProductsFile:
     handler: handlers/importProductsFile.importProductsFile
     events:
-      - http:
+      - httpApi:
           path: /import
           method: get
+          authorizer:
+            name: customAuthorizer
+            type: request
 
   importFileParser:
     handler: handlers/importFileParser.importFileParser
